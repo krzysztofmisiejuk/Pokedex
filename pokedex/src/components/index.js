@@ -1,0 +1,48 @@
+import {
+	MainWrapper,
+	Button,
+	Input,
+	Form,
+	SectionHeader,
+	SearchEngine,
+	SectionWrapper,
+	Nav,
+	Attributes,
+	Loader,
+	FightInfo,
+	Cards,
+} from './shared';
+
+import {
+	Arena,
+	Edit,
+	Favourites,
+	Home,
+	LoginDashboard,
+	Ranking,
+	SingUpDashboard,
+	PokemonDetails,
+} from './subpages';
+
+export {
+	MainWrapper,
+	Button,
+	Input,
+	Form,
+	SectionHeader,
+	SearchEngine,
+	SectionWrapper,
+	Nav,
+	Attributes,
+	Loader,
+	FightInfo,
+	Cards,
+	Arena,
+	Edit,
+	Favourites,
+	Home,
+	LoginDashboard,
+	Ranking,
+	SingUpDashboard,
+	PokemonDetails,
+};

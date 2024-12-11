@@ -11,13 +11,16 @@ import {
 	FavouritesProvider,
 	ArenaProvider,
 	StatsProvider,
+	EditProvider,
 } from './context';
 import {
 	Arena,
 	Edit,
+	EditPokemonForm,
 	Favourites,
 	Home,
 	LoginDashboard,
+	NewPokemonForm,
 	PokemonDetails,
 	Ranking,
 	SingUpDashboard,
@@ -38,6 +41,8 @@ const router = createBrowserRouter([
 			{ element: <Arena />, path: 'arena' },
 			{ element: <Ranking />, path: 'ranking' },
 			{ element: <Edit />, path: 'edit' },
+			{ element: <EditPokemonForm />, path: 'editPokemon/:name' },
+			{ element: <NewPokemonForm />, path: 'newPokemon' },
 			{ element: <LoginDashboard />, path: 'login' },
 			{ element: <SingUpDashboard />, path: 'singup' },
 		],
@@ -57,11 +62,13 @@ createRoot(document.getElementById('root')).render(
 				<LoginProvider>
 					<StatsProvider>
 						<PokemonProvider>
-							<ArenaProvider>
-								<FavouritesProvider>
-									<RouterProvider router={router} />
-								</FavouritesProvider>
-							</ArenaProvider>
+							<EditProvider>
+								<ArenaProvider>
+									<FavouritesProvider>
+										<RouterProvider router={router} />
+									</FavouritesProvider>
+								</ArenaProvider>
+							</EditProvider>
 						</PokemonProvider>
 					</StatsProvider>
 				</LoginProvider>

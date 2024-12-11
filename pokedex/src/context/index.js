@@ -1,4 +1,5 @@
 import { ArenaContext, ArenaProvider } from './ArenaContext';
+import { EditContext, EditProvider } from './EditContext';
 import { FavouritesContext, FavouritesProvider } from './FavouritesContext';
 import { LoginContext, LoginProvider } from './loginContext';
 import { PokemonContext, PokemonProvider } from './PokemonContext';
@@ -18,4 +19,6 @@ export {
 	FavouritesProvider,
 	StatsContext,
 	StatsProvider,
+	EditContext,
+	EditProvider,
 };

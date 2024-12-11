@@ -1,12 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
 import { Loader, SectionHeader } from '../../shared';
-import { PokemonContext, StatsContext } from '../../../context';
+import { PokemonContext, StatsContext, EditContext } from '../../../context';
 import { RankingTable } from './components';
 
 const Ranking = () => {
 	const { stats, fetchStats } = useContext(StatsContext);
 	const { pokemons, pokemonsDetails, pokemonsErrorDetails } =
 		useContext(PokemonContext);
+	const { newPokemons } = useContext(EditContext);
 	const [tableData, setTableData] = useState([]);
 	const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'asc' });
 	const [isLoading, setIsLoading] = useState(true);
@@ -15,27 +16,57 @@ const Ranking = () => {
 		fetchStats();
 
 		if (pokemons.length > 0 && pokemonsDetails.length === pokemons.length) {
-			const array = pokemonsDetails.map((pokemon) => {
+			// Mapowanie pokemonów z API (pokemonsDetails) z priorytetem dla newPokemons
+			const combinedData = pokemonsDetails.map((pokemon) => {
+				// Sprawdzamy, czy istnieje odpowiednik w newPokemons
+				const overriddenPokemon = newPokemons.find(
+					(newPokemon) =>
+						newPokemon?.name?.toLowerCase() === pokemon?.name?.toLowerCase()
+				);
+
+				// Jeśli istnieje odpowiednik w newPokemons, zwracamy dane z newPokemons, ale zachowujemy stare zdjęcie
+				return overriddenPokemon
+					? {
+							...overriddenPokemon,
+							imageUrl: pokemon.imageUrl || pokemon.sprites?.front_default,
+					  }
+					: pokemon;
+			});
+
+			// Dodajemy nowe pokemony, które nie istnieją w `pokemons`
+			const uniqueNewPokemons = newPokemons.filter(
+				(newPokemon) =>
+					!pokemonsDetails.some((pokemon) => pokemon?.name === newPokemon?.name)
+			);
+
+			// Łączymy dane z priorytetem dla newPokemons
+			const finalData = [...combinedData, ...uniqueNewPokemons];
+
+			// Tworzymy dane do tabeli
+			const singlePokemonData = finalData.map((pokemon, index) => {
 				const stat = stats.find((stat) => stat.name === pokemon.name);
+
 				return {
-					id: pokemon.id,
+					id: index + 1,
 					name: pokemon.name
 						? pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
 						: 'Brak nazwy',
-					height: pokemon.height,
-					weight: pokemon.weight,
+					height: pokemon.height || 'Brak danych',
+					weight: pokemon.weight || 'Brak danych',
 					exp: stat?.newExp
-						? pokemon.base_experience + stat.newExp
+						? Number(pokemon.base_experience) + stat.newExp
 						: pokemon.base_experience,
 					wins: stat?.wins ? stat.wins : 0,
 					loses: stat?.loses ? stat.loses : 0,
-					img: pokemon.sprites?.front_default || '',
+					img: pokemon.imageUrl || pokemon.sprites?.front_default || '', // zachowanie oryginalnego zdjęcia
 				};
 			});
 
-			const sortedArray = array.sort((a, b) => a.id - b.id);
-			setTableData(sortedArray);
 			setIsLoading(false);
+
+			const sortedPokemonData = singlePokemonData.sort((a, b) => a.id - b.id);
+
+			setTableData(sortedPokemonData);
 		}
 	}, [pokemonsDetails]);
 

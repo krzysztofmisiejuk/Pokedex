@@ -1,18 +1,15 @@
 import { useEffect, useContext } from 'react';
 import { MainWrapper, SectionWrapper, Nav } from './components';
 import './App.css';
-import { PokemonContext, StatsContext } from './context';
+import { EditContext, PokemonContext, StatsContext } from './context';
 import { useFetchData } from './hooks';
 import { Outlet } from 'react-router-dom';
 
 function App() {
-	const {
-		setPokemons,
-		pokemonsDetails,
-		setPokemonsDetails,
-		setErrorPokemonsDetails,
-	} = useContext(PokemonContext);
+	const { setPokemons, setPokemonsDetails, setErrorPokemonsDetails } =
+		useContext(PokemonContext);
 	const { fetchStats } = useContext(StatsContext);
+	const { fetchNewPokemons } = useContext(EditContext);
 	const { data } = useFetchData('https://pokeapi.co/api/v2/pokemon?limit=150');
 
 	useEffect(() => {
@@ -40,9 +37,8 @@ function App() {
 			});
 		}
 		fetchStats();
+		fetchNewPokemons();
 	}, [data]);
-
-	console.log('pokemonsDetails', pokemonsDetails);
 
 	return (
 		<div className='h-full min-h-screen flex justify-center dark:border-customLightGrey border-customDark bg-lightGradient dark:bg-darkGradient text-customDark dark:text-white'>

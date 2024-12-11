@@ -22,6 +22,8 @@ import {
 	Ranking,
 	SingUpDashboard,
 	PokemonDetails,
+	NewPokemonForm,
+	EditPokemonForm,
 } from './subpages';
 
 export {
@@ -45,4 +47,6 @@ export {
 	Ranking,
 	SingUpDashboard,
 	PokemonDetails,
+	NewPokemonForm,
+	EditPokemonForm,
 };

@@ -6,6 +6,8 @@ import { LoginDashboard } from './LoginDashboard';
 import { Ranking } from './Ranking';
 import { SingUpDashboard } from './SingUpDashboard';
 import PokemonDetails from './PokemonDetails/PokemonDetails';
+import { NewPokemonForm } from './NewPokemonForm';
+import { EditPokemonForm } from './EditPokemonForm';
 
 export {
 	Home,
@@ -16,4 +18,6 @@ export {
 	Ranking,
 	SingUpDashboard,
 	PokemonDetails,
+	NewPokemonForm,
+	EditPokemonForm,
 };

@@ -5,6 +5,8 @@ const Input = ({
 	register,
 	errors,
 	onChange,
+	defaultValue,
+	readOnly = false,
 }) => {
 	const handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
@@ -24,13 +26,15 @@ const Input = ({
 	return (
 		<>
 			<input
-				className='  p-1 text-md md:text-lg text-black bg-white shadow-customShadow rounded'
+				className='p-1 text-md md:text-lg text-black bg-white shadow-customShadow rounded'
 				type={type}
 				name={name}
 				placeholder={placeholder}
 				{...register(name)}
 				onChange={onChange}
 				onKeyDown={handleKeyDown}
+				defaultValue={defaultValue}
+				readOnly={readOnly}
 			/>
 			{
 				<span className='self-start text-xs sm:text-sm text-customRed'>

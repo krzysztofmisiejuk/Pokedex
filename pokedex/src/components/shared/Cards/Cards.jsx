@@ -1,7 +1,6 @@
 import { Card } from './components';
 
-const Cards = ({  filteredData, info }) => {
-
+const Cards = ({ filteredData, info, addedPokemons, page }) => {
 	return (
 		<div>
 			<div className='my-8 flex justify-center flex-wrap gap-6'>
@@ -10,6 +9,8 @@ const Cards = ({  filteredData, info }) => {
 						<Card
 							key={result.name}
 							name={result.name}
+							addedPokemons={addedPokemons}
+							page={page}
 						/>
 					))
 				) : (

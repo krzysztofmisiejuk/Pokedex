@@ -1,7 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, Loader, SectionHeader } from '../../shared';
-import { ArenaContext, PokemonContext, StatsContext } from '../../../context';
+import {
+	ArenaContext,
+	EditContext,
+	PokemonContext,
+	StatsContext,
+} from '../../../context';
 import { ArenaCard, ArenaPlaceholder, ArenaResultModal } from './components';
 
 const Arena = () => {
@@ -9,7 +14,7 @@ const Arena = () => {
 		useContext(ArenaContext);
 	const { stats, addStats, fetchStats } = useContext(StatsContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
-
+	const { newPokemons } = useContext(EditContext);
 	const [fighters, setFighters] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [fightResult, setFightResult] = useState(null);
@@ -21,37 +26,42 @@ const Arena = () => {
 	}, []);
 
 	useEffect(() => {
-		const selectedFighters = pokemonsDetails.filter((pokemon) =>
-			arenaPokemon.some((dataItem) => dataItem.name === pokemon.name)
-		);
+		const combinedPokemons = [...pokemonsDetails, ...newPokemons];
+		const selectedFighters = combinedPokemons
+			.filter((pokemon) =>
+				arenaPokemon.some((dataItem) => dataItem.name === pokemon.name)
+			)
+			.map((pokemon) => {
+				const pokemonStats = stats.find((stat) => stat.name === pokemon.name);
+
+				return {
+					...pokemon,
+					stats: {
+						wins: pokemonStats?.wins || 0,
+						loses: pokemonStats?.loses || 0,
+					},
+				};
+			});
+
 		setFighters(selectedFighters);
 		setIsLoading(false);
-	}, [arenaPokemon, pokemonsDetails]);
+	}, [arenaPokemon, pokemonsDetails, stats]);
 
 	const startFight = () => {
 		if (fighters.length < 2) return;
-		
+
 		const [firstFighter, secondFighter] = fighters;
 
-		const firstStat = stats.find((stat) => stat.name === firstFighter.name);
-		const secondStat = stats.find((stat) => stat.name === secondFighter.name);
-
-		const firstPower =
-			(firstFighter.base_experience + (firstStat?.newExp || 0)) *
-			firstFighter.weight;
-		const secondPower =
-			(secondFighter.base_experience + (secondStat?.newExp || 0)) *
-			secondFighter.weight;
+		const firstPower = firstFighter.base_experience * firstFighter.weight;
+		const secondPower = secondFighter.base_experience * secondFighter.weight;
 
 		if (firstPower === secondPower) {
 			setFightResult('remis');
 		} else {
-			setFightResult(
-				firstPower > secondPower ? firstFighter.name : secondFighter.name
-			);
-			updateStats(
-				firstPower > secondPower ? firstFighter.name : secondFighter.name
-			);
+			const winner =
+				firstPower > secondPower ? firstFighter.name : secondFighter.name;
+			setFightResult(winner);
+			updateStats(winner);
 		}
 
 		setTimeout(() => setIsModalOpen(true), 500);
@@ -95,6 +105,7 @@ const Arena = () => {
 					<ArenaCard
 						fighter={fighters[0]}
 						result={fightResult}
+						stats={stats}
 					/>
 				) : (
 					<ArenaPlaceholder number='1' />
@@ -113,6 +124,7 @@ const Arena = () => {
 					<ArenaCard
 						fighter={fighters[1]}
 						result={fightResult}
+						stats={stats}
 					/>
 				) : (
 					<ArenaPlaceholder number='2' />

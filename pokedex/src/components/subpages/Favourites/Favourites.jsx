@@ -1,26 +1,39 @@
-import { useEffect, useContext, useState } from 'react';
-import { FavouritesContext, PokemonContext } from '../../../context';
-import { Cards, Loader, SectionHeader } from '../../shared';
+import { useEffect, useContext, useMemo } from 'react';
+import {
+	EditContext,
+	FavouritesContext,
+	PokemonContext,
+	StatsContext,
+} from '../../../context';
+import { Loader, SectionHeader } from '../../shared';
+import { FavCard } from './components';
 
 const Favourites = () => {
 	const { favourites, fetchFavourites } = useContext(FavouritesContext);
-	const { pokemons } = useContext(PokemonContext);
-	const [pokemonList, setPokemonList] = useState([]);
+	const { pokemons, pokemonsDetails } = useContext(PokemonContext);
+	const { newPokemons } = useContext(EditContext);
+	const { stats } = useContext(StatsContext);
 
 	useEffect(() => {
-		fetchFavourites();
+		fetchFavourites()
+
 	}, []);
 
-	useEffect(() => {
-		if (pokemons.length > 0 && favourites.length > 0) {
-			const favPokemonList = pokemons.filter((pokemon) =>
-				favourites.some((dataItem) => dataItem.name === pokemon.name)
-			);
-			setPokemonList(favPokemonList);
-		}
-	}, [favourites, pokemons]);
+	const pokemonList = useMemo(() => {
+		const filteredNewPokemons = newPokemons.filter(
+			(pokemon) => pokemon.imgId > 150
+		);
 
-	if (favourites?.length < 1) {
+		const combinedPokemons = [...pokemonsDetails, ...filteredNewPokemons];
+
+		return combinedPokemons.filter((pokemon) =>
+			favourites.some(
+				(fav) => fav.name.toLowerCase() === pokemon.name.toLowerCase()
+			)
+		);
+	}, [pokemons, newPokemons, favourites]);
+
+	if (!favourites) {
 		return (
 			<div className='flex flex-col py-4'>
 				<SectionHeader headerText='Ulubione' />
@@ -29,13 +42,24 @@ const Favourites = () => {
 			</div>
 		);
 	}
+	console.log(pokemonList);
+
 	return (
-		<div className='py-4'>
+		<div className='flex flex-col items-center p-4 bg-transparent rounded'>
 			<SectionHeader headerText='Ulubione' />
-			<Cards
-				filteredData={pokemonList}
-				info='Lista ulubionych jest pusta, dodaj pokemony do swojej listy!'
-			/>
+			<div className='my-8 flex justify-center flex-wrap gap-6'>
+				{pokemonList.length === 0 ? (
+					<p>Nie wybrano ulubionych pokemonów</p>
+				) : (
+					pokemonList.map((pokemon) => (
+						<FavCard
+							key={pokemon.name}
+							pokemon={pokemon}
+							stats={stats}
+						/>
+					))
+				)}
+			</div>
 		</div>
 	);
 };

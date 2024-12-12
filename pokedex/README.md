@@ -52,7 +52,7 @@ Jeżeli znajdujesz się w prawidłowym pliku wpisz komndę w terminalu `npm inst
 
 Powinny zostać zainstalowane wszytskie paczki będące konieczne do odpowiedniego działania strony.
 
-Strona korzysta z adresu http://localhost:5173, do uruchomienia strony wpisz w terminalu `npm run dev`
+Strona korzysta z adresu http://localhost:5173, do uruchomienia poprzez Vite strony wpisz w terminalu `npm run dev`
 
 Dane strony są zapisywane w lokalnej bazie danych, dlatego uruchom JSON server wpisujać komendę `npm run db`
 

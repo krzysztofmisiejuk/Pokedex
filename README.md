@@ -45,7 +45,11 @@ Repozytorium zawiera plik package.json, kóry zawiera niezbęde informacje do in
   <li>Strona POkedex powinna działać poprawnie</li>	
 </ol>
 
-
+```
+$ cd ../lorem
+$ npm install
+$ npm start
+```
  
 
 ## Informacje szczegółowe

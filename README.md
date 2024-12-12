@@ -9,8 +9,9 @@ Pokedex to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów poch
 
 ## Technologie
 <p>Srtona została utworzona przy pomocy: </p>
+ * vite ^5.4.10
 <ul>
-  * vite ^5.4.10<
+ 
   <li>react ^18.3.1</li>
   <li>react-dom ^18.3.1</li>
   <li>react-hook-form ^7.53.2</li>

@@ -14,6 +14,7 @@ PokedeX to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów poch
   <li>react-dom ^18.3.1</li>
   <li>react-hook-form ^18.3.1</li>
 </ul>
+
 ## Instalacja
 Repozytorium zawiera plik package.json, kóry zawiera niezbęde informacje do instalaji wszytskich paczek koniecznych do prawidłowego działnia strony.
 <ol>

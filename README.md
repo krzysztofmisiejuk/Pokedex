@@ -1,9 +1,9 @@
 # Pokedex
 
-* [Informacje ogólne](#infornacje)
+* [Informacje ogólne](#informacje)
 * [Technoloigie](#technologie)
-* [Instalacja](#instalacja)
-* [informacje szczególowe](#szczegóły)
+* [Instalacja i uruchomienie](#instalacja-i-uruchomienie)
+* [informacje szczególowe](#informacje-szczegółowe)
 
 ## Informacje
 

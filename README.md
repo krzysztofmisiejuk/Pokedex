@@ -1,4 +1,8 @@
 ## Pokedex
-*[Informacje ogólne](#info)
-#[Technoloigie](#tech)
-#[Instalacja](#setup)
+* [Informacje ogólne](#infornacje)
+* [Technoloigie](#technologie)
+* [Instalacja](#instalacja)
+
+# Informacje
+# Technologie
+# Instalacja

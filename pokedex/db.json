@@ -1,26 +1,15 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "user",
-      "userName": "user",
-      "email": "user@email.pl",
-      "password": "Password123!"
-    }
-  ],
-  "favourites": [],
-  "arena": [],
-  "stats": [],
-  "newPokemons": [
-    {
-      "name": "Bobek",
-      "weight": "1000",
-      "height": "1000",
-      "base_experience": "1000",
-      "imgId": 151,
-      "pokemonId": 151,
-      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
-      "id": 1
-    }
-  ]
+	"users": [
+		{
+			"id": 1,
+			"name": "user",
+			"userName": "user",
+			"email": "user@email.pl",
+			"password": "Password123!"
+		}
+	],
+	"favourites": [],
+	"arena": [],
+	"stats": [],
+	"newPokemons": []
 }

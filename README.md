@@ -5,11 +5,12 @@
 * [informacje szczególowe](#szczegóły)
 
 ## Informacje
-PokedeX to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów pochodzących z API (https://pokeapi.co/). Strona pozwala na dodawanie pokemnów do ulubionych, walki w arenie, sortowanie pokemonów w rankingu, edycje pokemonów pochodzących z API oraz dodawanie nowych pokemonów do całej kolekcji. 
+Pokedex to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów pochodzących z API (https://pokeapi.co/). Strona pozwala na dodawanie pokemnów do ulubionych, walki w arenie, sortowanie pokemonów w rankingu, edycje pokemonów pochodzących z API oraz dodawanie nowych pokemonów do całej kolekcji. 
+
 ## Technologie
 <p>Srtona została utworzona przy pomocy: </p>
 <ul>
-  <li>vite ^5.4.10</li>
+  * vite ^5.4.10<
   <li>react ^18.3.1</li>
   <li>react-dom ^18.3.1</li>
   <li>react-hook-form ^7.53.2</li>
@@ -47,7 +48,7 @@ Powinny zostać zainstalowane wszytskie paczki będące konieczne do odpowiednie
 
 Strona korzysa z adresu http://localhost:5173, do uruchomienia strony wpisz w terminalu ```npm run dev```</br>
 
-Dane strony są zapisywane w lokalnej bazie danych, dlatego uruchom JSON server wpisujać komendę ```npm run db```</br>
+Dane strony są zapisywane w lokalnej bazie danych, dlatego uruchom JSON server wpisujać komendę w nowym oknie terminalu ```npm run db```</br>
 
 Strona Pokedex powinna działać poprawnie.
 
@@ -55,6 +56,7 @@ Strona Pokedex powinna działać poprawnie.
  
 
 ## Informacje szczegółowe
+
 
 ### Wyszukiwarka
 ### Ulubione

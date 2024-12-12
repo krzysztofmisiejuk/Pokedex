@@ -61,6 +61,15 @@ Strona Pokedex powinna działać poprawnie na porcie localhost:5173.
 
 ## Informacje szczegółowe
 
+### Funkcjonalności
+
+* Logowanie i rejestracja użytkowników
+* Przeglądanie pokemonów z PokeAPI
+* Wyszukiwanie i filtrowanie pokemonów
+* Dodawanie pokemonów do ulubionych i areny walk
+* Ranking pokemonów według różnych parametrów
+* Edycja istniejących pokemonów oraz tworzenie nowych
+
 ### Logowanie 
 Do pokedex można się zalogować bez konieczności rejrestracji używając domyślnych danych lub po rejerstracji, wprowadzając nowe użytkownika do lokalnej bazy danych.
 

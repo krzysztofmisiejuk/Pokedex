@@ -1,11 +1,11 @@
 # Pokedex
 
-* [Informacje ogólne](#informacje)
+* [Informacje ogólne](#informacje-ogólne)
 * [Technoloigie](#technologie)
 * [Instalacja i uruchomienie](#instalacja-i-uruchomienie)
-* [informacje szczególowe](#informacje-szczegółowe)
+* [Informacje szczególowe](#informacje-szczegółowe)
 
-## Informacje
+## Informacje ogólne
 
 PokedeX to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów pochodzących z API (https://pokeapi.co/). Strona pozwala na dodawanie pokemnów do ulubionych, walki w arenie, sortowanie pokemonów w rankingu, edycje pokemonów pochodzących z API oraz dodawanie nowych pokemonów do całej kolekcji. 
 

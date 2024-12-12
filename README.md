@@ -3,7 +3,7 @@
 * [Informacje ogólne](#informacje-ogólne)
 * [Technoloigie](#technologie)
 * [Instalacja i uruchomienie](#instalacja-i-uruchomienie)
-* [Informacje szczególowe](#informacje-szczegółowe)
+* [Informacje szczegółowe](#informacje-szczegółowe)
 
 ## Informacje ogólne
 

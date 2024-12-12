@@ -1,6 +1,6 @@
 const MainWrapper = ({ children }) => {
 	return (
-		<div className='text-center flex flex-col sm: px-0 md:px-8 max-w-screen-2xl size-full '>
+		<div className='flex flex-col sm:px-0 md:px-8 size-full max-w-screen-2xl text-center'>
 			{children}
 		</div>
 	);

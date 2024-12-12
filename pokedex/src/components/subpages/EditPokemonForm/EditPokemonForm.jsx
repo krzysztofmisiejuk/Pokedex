@@ -1,42 +1,18 @@
-import { useForm } from 'react-hook-form';
-import { Button, Form, Input, Loader } from '../../shared';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { enqueueSnackbar } from 'notistack';
 import { EditContext, PokemonContext } from '../../../context';
+import { Button, Form, Input, Loader } from '../../shared';
 
 const EditPokemonForm = () => {
-	const [matchedPokemon, setMatchedPokemon] = useState(null);
 	const { newPokemons, fetchNewPokemons } = useContext(EditContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
+	const [matchedPokemon, setMatchedPokemon] = useState(null);
 	const navigate = useNavigate();
 	const { name: pokemonName } = useParams();
-
-	useEffect(() => {
-		if (pokemonsDetails && newPokemons) {
-			const combinedPokemons = pokemonsDetails.map((pokemon) => {
-				const updatedPokemon = newPokemons.find(
-					(newPokemon) =>
-						newPokemon?.name?.toLowerCase() === pokemon?.name?.toLowerCase()
-				);
-				return updatedPokemon ? { ...pokemon, ...updatedPokemon } : pokemon;
-			});
-
-			if (pokemonName) {
-				const foundPokemon =
-					combinedPokemons.find(
-						({ name }) => name?.toLowerCase() === pokemonName?.toLowerCase()
-					) ||
-					newPokemons.find(
-						({ name }) => name?.toLowerCase() === pokemonName?.toLowerCase()
-					);
-
-				setMatchedPokemon(foundPokemon);
-			}
-		}
-	}, [pokemonsDetails, newPokemons, pokemonName]);
 
 	const newPokemonSchema = z.object({
 		name: z.string().optional(),
@@ -55,6 +31,30 @@ const EditPokemonForm = () => {
 		resolver: zodResolver(newPokemonSchema),
 	});
 
+	useEffect(() => {
+		if (pokemonsDetails && newPokemons) {
+			const combinedPokemons = pokemonsDetails.map((pokemon) => {
+				const updatedPokemon = newPokemons.find(
+					(newPokemon) =>
+						newPokemon?.name?.toLowerCase() === pokemon?.name?.toLowerCase()
+				);
+				return updatedPokemon ? { ...pokemon, ...updatedPokemon } : pokemon;
+			});
+
+			if (pokemonName) {
+				const findPokemon =
+					combinedPokemons.find(
+						({ name }) => name?.toLowerCase() === pokemonName?.toLowerCase()
+					) ||
+					newPokemons.find(
+						({ name }) => name?.toLowerCase() === pokemonName?.toLowerCase()
+					);
+
+				setMatchedPokemon(findPokemon);
+			}
+		}
+	}, [pokemonsDetails, newPokemons, pokemonName]);
+
 	const updatePokemon = async (formData) => {
 		const pokemonData = {
 			...formData,
@@ -65,14 +65,11 @@ const EditPokemonForm = () => {
 		try {
 			const existingPokemon = newPokemons.find(
 				(pokemon) =>
-					pokemon?.name?.toLowerCase() === pokemonData?.name?.toLowerCase() 
+					pokemon?.name?.toLowerCase() === formData?.name?.toLowerCase()
 			);
-
-			
-
 			if (existingPokemon) {
 				const response = await fetch(
-					`http://localhost:3000/newPokemons/${existingPokemon.name}`,
+					`http://localhost:3000/newPokemons/${formData.name}`,
 					{
 						method: 'PATCH',
 						headers: {
@@ -114,7 +111,7 @@ const EditPokemonForm = () => {
 			console.error('Błąd wysyłania danych:', error);
 		}
 
-		navigate('/edit');
+		navigate('/');
 	};
 
 	const onSubmit = (data) => {
@@ -122,7 +119,7 @@ const EditPokemonForm = () => {
 	};
 
 	return (
-		<div className='flex items-center justify-center flex-col size-full bg-lightGradient dark:bg-darkGradient'>
+		<div className='flex flex-col items-center justify-center size-full bg-lightGradient dark:bg-darkGradient'>
 			<div className='self-start mx-5 mt-2'>
 				<Button
 					onClick={() => {
@@ -138,7 +135,7 @@ const EditPokemonForm = () => {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<h3 className='self-center my-4 font-semibold text-xl md:text-2xl dark:text-white'>
-					Dodaj lub zaktualizuj Pokemona
+					Edytuj Pokemona
 				</h3>
 				<Input
 					placeholder='Podaj nazwę nowego pokemona'
@@ -172,7 +169,7 @@ const EditPokemonForm = () => {
 					defaultValue={matchedPokemon?.base_experience}
 				/>
 
-				<div className='flex items-center self-center'>
+				<div className='self-center flex items-center'>
 					{matchedPokemon?.imageUrl ||
 					matchedPokemon?.sprites?.front_default ? (
 						<img

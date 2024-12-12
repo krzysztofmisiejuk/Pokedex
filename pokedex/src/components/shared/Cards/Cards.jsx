@@ -3,7 +3,7 @@ import { Card } from './components';
 const Cards = ({ filteredData, info, addedPokemons, page }) => {
 	return (
 		<div>
-			<div className='my-8 flex justify-center flex-wrap gap-6'>
+			<div className='flex justify-center flex-wrap gap-6 my-8'>
 				{filteredData.length > 0 ? (
 					filteredData.map((result) => (
 						<Card

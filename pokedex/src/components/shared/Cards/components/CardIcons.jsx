@@ -1,5 +1,4 @@
-import HeartIcon from './HeartIcon';
-import SwordIcon from './SwordIcon';
+import { HeartIcon, SwordIcon } from './';
 
 const CardIcons = ({ name }) => {
 	return (

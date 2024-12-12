@@ -4,7 +4,6 @@ import { MainWrapper } from './MainWrapper';
 import { Input } from './Input';
 import { Form } from './Form';
 import { SectionHeader } from './SectionHeader';
-import { SearchEngine } from './SearchEngine';
 import { SectionWrapper } from './SectionWrapper';
 import { Attributes } from './Attributes';
 import { Loader } from './Loader';
@@ -18,7 +17,6 @@ export {
 	Input,
 	Form,
 	SectionHeader,
-	SearchEngine,
 	SectionWrapper,
 	Attributes,
 	Loader,

@@ -15,7 +15,7 @@ const FavCard = ({ pokemon, stats }) => {
 
 	return (
 		<div
-			className='relative p-3 flex flex-col w-1/6 min-w-56 gap-4 shadow-customShadow rounded overflow-hidden hover:scale-105 transition cursor-pointer'
+			className='relative flex flex-col p-3 w-1/6 min-w-56 gap-4 shadow-customShadow rounded overflow-hidden transition cursor-pointer hover:scale-105'
 			onClick={onClickHandle}
 		>
 			<CardIcons name={pokemon.name} />
@@ -24,7 +24,7 @@ const FavCard = ({ pokemon, stats }) => {
 			<img
 				src={pokemon?.sprites?.front_default || pokemon?.imageUrl}
 				alt={`${pokemon?.name} image`}
-				className='w-3/4 self-center'
+				className='self-center w-3/4'
 			/>
 			<p className='font-semibold capitalize text-xl md:text-2xl'>
 				{pokemon.name}

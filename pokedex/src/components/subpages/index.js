@@ -8,6 +8,7 @@ import { SingUpDashboard } from './SingUpDashboard';
 import PokemonDetails from './PokemonDetails/PokemonDetails';
 import { NewPokemonForm } from './NewPokemonForm';
 import { EditPokemonForm } from './EditPokemonForm';
+import { SearchEngine } from './SearchEngine';
 
 export {
 	Home,
@@ -20,4 +21,5 @@ export {
 	PokemonDetails,
 	NewPokemonForm,
 	EditPokemonForm,
+	SearchEngine
 };

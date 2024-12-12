@@ -14,10 +14,9 @@ const PokemonDetails = () => {
 	const { stats } = useContext(StatsContext);
 	const { newPokemons } = useContext(EditContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
-	const { name } = useParams();
-
 	const [pokemonData, setPokemonData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const { name } = useParams();
 
 	useEffect(() => {
 		if (!name) return;
@@ -62,7 +61,7 @@ const PokemonDetails = () => {
 	const isExistStat = stats.find((stat) => stat.name === name);
 
 	return (
-		<div className='mb-6 flex flex-col md:flex-row flex-wrap items-center justify-center p-2 relative'>
+		<div className='relative flex flex-col md:flex-row flex-wrap items-center justify-center mb-6 p-2'>
 			{isLoggedIn && <CardIcons name={name} />}
 			{isLoggedIn && isExistStat && <FightInfo stats={isExistStat} />}
 			<div className='flex justify-center w-1/2'>
@@ -72,7 +71,7 @@ const PokemonDetails = () => {
 					className='w-3/4 min-w-56 max-w-sm'
 				/>
 			</div>
-			<div className='pb-6 md:pb-2 flex flex-col items-center gap-6 md:w-1/2'>
+			<div className='flex flex-col items-center gap-6 pb-6 md:pb-2 md:w-1/2'>
 				<p className='text-3xl font-bold capitalize'>{name}</p>
 				<Attributes
 					data={pokemonData}

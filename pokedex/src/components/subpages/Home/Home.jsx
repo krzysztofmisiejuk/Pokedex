@@ -1,4 +1,4 @@
-import {  SearchEngine } from '../../shared';
+import { SearchEngine } from "../SearchEngine";
 
 const Home = () => {
 	return <SearchEngine />;

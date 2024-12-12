@@ -26,8 +26,8 @@ function App() {
 					}
 					const singlePokemonData = await response.json();
 
-					setPokemonsDetails((prevDetails) => [
-						...prevDetails,
+					setPokemonsDetails((prev) => [
+						...prev,
 						singlePokemonData,
 					]);
 				} catch (error) {

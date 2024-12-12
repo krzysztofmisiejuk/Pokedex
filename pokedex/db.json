@@ -2,24 +2,25 @@
   "users": [
     {
       "id": 1,
-      "name": "Krzysztof",
-      "userName": "kmisiejuk",
-      "email": "kmisiejuk@email.pl",
+      "name": "user",
+      "userName": "user",
+      "email": "user@email.pl",
       "password": "Password123!"
     }
   ],
-  "favourites": [
-    {
-      "name": "charmander",
-      "id": 1
-    }
-  ],
-  "arena": [
-    {
-      "name": "ivysaur",
-      "id": 1
-    }
-  ],
+  "favourites": [],
+  "arena": [],
   "stats": [],
-  "newPokemons": []
+  "newPokemons": [
+    {
+      "name": "Bobek",
+      "weight": "1000",
+      "height": "1000",
+      "base_experience": "1000",
+      "imgId": 151,
+      "pokemonId": 151,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+      "id": 1
+    }
+  ]
 }

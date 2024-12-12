@@ -37,10 +37,9 @@ const NewPokemonForm = () => {
 		const pokemonData = {
 			...formData,
 			imgId,
+			pokemonId: imgId,
 			imageUrl: data.sprites.front_default,
 		};
-
-		console.log('Wysyłane dane:', pokemonData);
 
 		try {
 			const response = await fetch('http://localhost:3000/newPokemons', {
@@ -59,7 +58,7 @@ const NewPokemonForm = () => {
 			console.error('Błąd wysyłania danych:', error);
 		}
 
-		navigate('/edit');
+		navigate('/');
 		enqueueSnackbar({
 			message: `${formData?.name.charAt(0).toUpperCase()}${formData?.name
 				.slice(1)
@@ -153,7 +152,7 @@ const NewPokemonForm = () => {
 						</p>
 					)}
 					<button
-						className='bg-customDark hover:bg-customLightGrey h-12 rounded disabled:opacity-50 disabled:hover:bg-darkBg shadow-customShadow'
+						className='h-12 bg-customDark hover:bg-customLightGrey rounded disabled:opacity-50 disabled:hover:bg-darkBg shadow-customShadow'
 						type='button'
 						onClick={prevImg}
 						disabled={imgId <= 151}
@@ -165,7 +164,7 @@ const NewPokemonForm = () => {
 					</button>
 					{data && !isLoading ? (
 						<img
-							className={clsx('h-36 mx-4', { 'opacity-20': isImgMatch })}
+							className={clsx('h-36 mx-4', isImgMatch && 'opacity-20')}
 							src={data.sprites.front_default}
 							alt='new Pokemon image'
 						/>
@@ -175,7 +174,7 @@ const NewPokemonForm = () => {
 						</div>
 					)}
 					<button
-						className='bg-customDark hover:bg-customLightGrey h-12 rounded shadow-customShadow'
+						className='h-12 bg-customDark hover:bg-customLightGrey rounded shadow-customShadow'
 						onClick={nextImg}
 					>
 						<img

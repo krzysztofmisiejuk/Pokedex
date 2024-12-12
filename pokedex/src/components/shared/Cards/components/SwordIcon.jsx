@@ -1,7 +1,7 @@
-import clsx from 'clsx';
-import { enqueueSnackbar } from 'notistack';
-import { ArenaContext } from '../../../../context';
 import { useContext, useEffect, useMemo } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import clsx from 'clsx';
+import { ArenaContext } from '../../../../context';
 
 const SwordIcon = ({ name }) => {
 	const { arenaPokemon, fetchArenaData, addToArena, removeFromArena } =

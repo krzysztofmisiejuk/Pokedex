@@ -4,7 +4,6 @@ import {
 	Input,
 	Form,
 	SectionHeader,
-	SearchEngine,
 	SectionWrapper,
 	Nav,
 	Attributes,
@@ -24,6 +23,7 @@ import {
 	PokemonDetails,
 	NewPokemonForm,
 	EditPokemonForm,
+	SearchEngine,
 } from './subpages';
 
 export {

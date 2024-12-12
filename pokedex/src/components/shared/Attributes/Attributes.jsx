@@ -14,11 +14,11 @@ const Attributes = ({ data, stats }) => {
 		<div className='grid grid-cols-2 gap-2 w-full'>
 			<SingleAttribute
 				value={isEdited?.height ? isEdited?.height : data?.height}
-				name='Height'
+				name='Wzrost'
 			/>
 			<SingleAttribute
 				value={isEdited?.weight ? isEdited?.weight : data?.weight}
-				name='Weight'
+				name='Waga'
 			/>
 			<SingleAttribute
 				value={
@@ -30,12 +30,12 @@ const Attributes = ({ data, stats }) => {
 						? data.base_experience + isExistStat.newExp
 						: data.base_experience
 				}
-				name='Base experience'
+				name='Exp'
 			/>
 
 			<SingleAttribute
 				value={data?.abilities ? data?.abilities[0]?.ability?.name : 'Brak danych'}
-				name='Ability'
+				name='Zdolność'
 			/>
 		</div>
 	);

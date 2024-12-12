@@ -6,11 +6,8 @@ import {
 	EditContext,
 	PokemonContext,
 } from '../../../../context';
-import { Loader } from '../../Loader';
 import CardIcons from './CardIcons';
-import { FightInfo } from '../../FightInfo';
-import { Attributes } from '../../Attributes';
-import { SectionHeader } from '../../SectionHeader';
+import { Attributes, SectionHeader, FightInfo, Loader } from '../../';
 
 const Card = ({ name, addedPokemons, page }) => {
 	const { isLoggedIn } = useContext(LoginContext);
@@ -20,6 +17,7 @@ const Card = ({ name, addedPokemons, page }) => {
 	const [pokemonData, setPokemonData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
+	const isExistStat = stats.find((stat) => stat.name === name);
 
 	useEffect(() => {
 		const findPokemonData = () => {
@@ -99,7 +97,7 @@ const Card = ({ name, addedPokemons, page }) => {
 
 	if (isLoading) {
 		return (
-			<div className='self-center py-4 '>
+			<div className='self-center py-4'>
 				<SectionHeader headerText='Ranking' />
 				<Loader />
 				<p>Trwa ładowanie danych...</p>
@@ -107,11 +105,9 @@ const Card = ({ name, addedPokemons, page }) => {
 		);
 	}
 
-	const isExistStat = stats.find((stat) => stat.name === name);
-
 	return (
 		<div
-			className='relative p-3 flex flex-col w-1/6 min-w-56 gap-4 shadow-customShadow rounded overflow-hidden hover:scale-105 transition cursor-pointer'
+			className='relative  flex flex-col gap-4 w-1/6 min-w-56 p-3 shadow-customShadow rounded overflow-hidden transition cursor-pointer hover:scale-105'
 			onClick={onClickHandle}
 		>
 			{isLoggedIn && <CardIcons name={name} />}
@@ -122,7 +118,7 @@ const Card = ({ name, addedPokemons, page }) => {
 					<img
 						src={pokemonData?.sprites?.front_default || pokemonData.imageUrl}
 						alt={`${name} image`}
-						className='w-3/4 self-center'
+						className='self-center w-3/4'
 					/>
 					<p className='font-semibold capitalize text-xl md:text-2xl'>{name}</p>
 					<Attributes

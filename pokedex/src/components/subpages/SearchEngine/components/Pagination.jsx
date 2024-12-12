@@ -1,4 +1,4 @@
-import { Button } from '../../Button';
+import { Button } from '../../../shared';
 
 const Pagination = ({ page, setPage, totalPages }) => {
 	const handlePrevPage = () => {
@@ -17,7 +17,6 @@ const Pagination = ({ page, setPage, totalPages }) => {
 		<div className='flex flex-col items-center'>
 			<span className='text-md lg:text-xl '>
 				<span className='font-semibold'>
-					{' '}
 					Strona
 					<select
 						className='ml-2 bg-transparent border border-customDark rounded dark:border-customLightGrey'

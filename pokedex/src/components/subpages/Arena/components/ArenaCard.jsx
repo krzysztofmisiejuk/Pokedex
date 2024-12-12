@@ -1,12 +1,12 @@
-import clsx from 'clsx';
 import { useContext } from 'react';
+import clsx from 'clsx';
 import { Attributes, FightInfo, Loader } from '../../../shared';
 import { ArenaContext } from '../../../../context';
 
 const ArenaCard = ({ fighter, result, stats }) => {
 	const { removeFromArena } = useContext(ArenaContext);
 
-	if (fighter.length < 1 && fighter?.sprites?.front_default || fighter?.imageUrl) {
+	if (fighter.length < 1) {
 		return (
 			<div className='flex flex-col py-4'>
 				<Loader />
@@ -17,7 +17,7 @@ const ArenaCard = ({ fighter, result, stats }) => {
 	return (
 		<div
 			className={clsx(
-				'relative p-3 flex flex-col w-1/6 min-w-56 min-h-[386px] gap-4 shadow-customShadow rounded overflow-hidden transition',
+				'relative flex flex-col gap-4 p-3 w-1/6 min-w-56 min-h-[386px] shadow-customShadow rounded overflow-hidden transition',
 				result !== fighter.name && result && 'opacity-35'
 			)}
 		>
@@ -27,7 +27,7 @@ const ArenaCard = ({ fighter, result, stats }) => {
 				onClick={() => removeFromArena(fighter.name)}
 			>
 				<img
-					className='w-8 border-2 p-1 rounded border-transparent hover:border-customGrey opacity-50 hover:opacity-100'
+					className='p-1 w-8 border-transparent border-2 rounded opacity-50 hover:border-customGrey hover:opacity-100'
 					src='./src/icons/remove.png'
 					alt='Remove'
 				/>
@@ -36,7 +36,7 @@ const ArenaCard = ({ fighter, result, stats }) => {
 			<img
 				src={fighter?.sprites?.front_default || fighter?.imageUrl}
 				alt={`${fighter.name} image`}
-				className='w-3/4 self-center'
+				className='self-center w-3/4'
 			/>
 			<p className='font-semibold capitalize text-xl md:text-2xl'>
 				{fighter.name}

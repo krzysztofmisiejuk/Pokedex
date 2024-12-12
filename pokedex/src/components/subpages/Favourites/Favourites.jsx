@@ -15,8 +15,7 @@ const Favourites = () => {
 	const { stats } = useContext(StatsContext);
 
 	useEffect(() => {
-		fetchFavourites()
-
+		fetchFavourites();
 	}, []);
 
 	const pokemonList = useMemo(() => {
@@ -42,12 +41,11 @@ const Favourites = () => {
 			</div>
 		);
 	}
-	console.log(pokemonList);
 
 	return (
 		<div className='flex flex-col items-center p-4 bg-transparent rounded'>
 			<SectionHeader headerText='Ulubione' />
-			<div className='my-8 flex justify-center flex-wrap gap-6'>
+			<div className='flex justify-center flex-wrap gap-6 my-8 '>
 				{pokemonList.length === 0 ? (
 					<p>Nie wybrano ulubionych pokemonów</p>
 				) : (

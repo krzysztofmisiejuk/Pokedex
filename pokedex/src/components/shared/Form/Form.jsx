@@ -1,10 +1,10 @@
-import { Button } from '../Button';
+import { Button } from '../';
 
 const Form = ({ children, buttonContent, onSubmit }) => {
 	return (
 		<form
 			onSubmit={onSubmit}
-			className='p-3 mb-4  flex flex-col self-center  gap-3 justify-center size-10/12 md:max-w-md'
+			className='flex flex-col self-center justify-center gap-3 p-3 mb-4 size-10/12 md:max-w-md'
 			noValidate
 		>
 			{children}

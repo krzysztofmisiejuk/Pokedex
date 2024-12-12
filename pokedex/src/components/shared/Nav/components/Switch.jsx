@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../../../../context';
 
-
 const Switch = () => {
 	const { darkTheme, toggleTheme } = useContext(ThemeContext);
 

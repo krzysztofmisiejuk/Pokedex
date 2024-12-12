@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { enqueueSnackbar } from 'notistack';
+import clsx from 'clsx';
 import { LoginContext } from '../../../context';
 import { Button } from '../';
 import { Logo, Switch, NavLinks } from './components';
@@ -31,17 +32,19 @@ const Nav = () => {
 	};
 
 	return (
-		<div className='mb-4 py-4 border-b-[1px] border-customDark dark:border-white flex flex-col justify-center items-center  lg:flex-row lg:justify-between gap-4'>
+		<div className='flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-4 mb-4 py-4 border-b-[1px] border-customDark dark:border-white'>
 			<Logo />
 			<div
-				className={`flex flex-col ${
+				className={clsx(
+					'flex flex-col gap-2 size-10/12 md:size-fit',
 					!isLoggedIn && 'md:self-end'
-				} gap-2 size-10/12 md:size-fit`}
+				)}
 			>
 				<div
-					className={` flex gap-10 w-full lg:max-w-fit  ${
+					className={clsx(
+						'flex gap-10 w-full self-center md:self-end lg:max-w-fit ',
 						isLoggedIn ? 'justify-between' : 'justify-end'
-					} self-center md:self-end`}
+					)}
 				>
 					{isLoggedIn && (
 						<div className='flex items-center'>
@@ -55,7 +58,7 @@ const Nav = () => {
 					)}
 					<Switch className='self-end' />
 				</div>
-				<div className='flex flex-col items-center gap-2.5 md:flex-row'>
+				<div className='flex flex-col items-center md:flex-row gap-2.5'>
 					{isLoggedIn ? (
 						<>
 							<NavLinks elements={loggedInElements} />

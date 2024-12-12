@@ -16,15 +16,12 @@ const Ranking = () => {
 		fetchStats();
 
 		if (pokemons.length > 0 && pokemonsDetails.length === pokemons.length) {
-			// Mapowanie pokemonów z API (pokemonsDetails) z priorytetem dla newPokemons
 			const combinedData = pokemonsDetails.map((pokemon) => {
-				// Sprawdzamy, czy istnieje odpowiednik w newPokemons
 				const overriddenPokemon = newPokemons.find(
 					(newPokemon) =>
 						newPokemon?.name?.toLowerCase() === pokemon?.name?.toLowerCase()
 				);
 
-				// Jeśli istnieje odpowiednik w newPokemons, zwracamy dane z newPokemons, ale zachowujemy stare zdjęcie
 				return overriddenPokemon
 					? {
 							...overriddenPokemon,
@@ -33,16 +30,13 @@ const Ranking = () => {
 					: pokemon;
 			});
 
-			// Dodajemy nowe pokemony, które nie istnieją w `pokemons`
 			const uniqueNewPokemons = newPokemons.filter(
 				(newPokemon) =>
 					!pokemonsDetails.some((pokemon) => pokemon?.name === newPokemon?.name)
 			);
 
-			// Łączymy dane z priorytetem dla newPokemons
 			const finalData = [...combinedData, ...uniqueNewPokemons];
 
-			// Tworzymy dane do tabeli
 			const singlePokemonData = finalData.map((pokemon, index) => {
 				const stat = stats.find((stat) => stat.name === pokemon.name);
 
@@ -58,7 +52,7 @@ const Ranking = () => {
 						: pokemon.base_experience,
 					wins: stat?.wins ? stat.wins : 0,
 					loses: stat?.loses ? stat.loses : 0,
-					img: pokemon.imageUrl || pokemon.sprites?.front_default || '', // zachowanie oryginalnego zdjęcia
+					img: pokemon.imageUrl || pokemon.sprites?.front_default,
 				};
 			});
 
@@ -95,7 +89,7 @@ const Ranking = () => {
 
 	if (isLoading) {
 		return (
-			<div className='self-center py-4 '>
+			<div className='self-center py-4'>
 				<SectionHeader headerText='Ranking' />
 				<Loader />
 				<p>Trwa ładowanie danych...</p>
@@ -104,7 +98,7 @@ const Ranking = () => {
 	}
 
 	return (
-		<div className='flex justify-center text-xs md:text-base px-0 md:px-10 flex-wrap flex-col py-4'>
+		<div className='flex flex-col justify-center flex-wrap px-0 md:px-10 py-4 text-xs md:text-base'>
 			<SectionHeader headerText='Ranking' />
 			<RankingTable
 				keysTable={keysTable}

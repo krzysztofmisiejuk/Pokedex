@@ -1,10 +1,8 @@
 import { useState, useMemo, useEffect, useContext } from 'react';
 import { useFetchData } from '../../../hooks';
+import { Cards, Loader, SectionHeader } from '../../shared';
 import { Pagination } from './components';
-import { SectionHeader } from '../SectionHeader';
-import { Cards } from '../Cards';
 import { EditContext } from '../../../context';
-import { Loader } from '../Loader';
 
 const SearchEngine = () => {
 	const [searchPokemon, setPokemonList] = useState('');
@@ -47,11 +45,11 @@ const SearchEngine = () => {
 		<div className='flex flex-col items-center p-4 bg-transparent rounded'>
 			<SectionHeader headerText='Wyszukiwarka' />
 			<input
-				className='size-full max-w-xl my-3 p-2 bg-inherit border-customGrey border-2 rounded'
+				className='my-3 p-2 size-full max-w-xl  bg-inherit border-customGrey border-2 rounded'
 				placeholder='Wpisz nazwę pokemona'
 				onChange={handleOnChange}
 			/>
-			{isLoading && filteredData.length > 0 ? (
+			{isLoading ? (
 				<div className='self-center py-4'>
 					<Loader />
 					<p>Trwa ładowanie danych...</p>

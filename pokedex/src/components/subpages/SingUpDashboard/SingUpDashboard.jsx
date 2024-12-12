@@ -1,15 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { Form, Input, SectionHeader } from '../../shared';
 import { useNavigate } from 'react-router-dom';
-import { useFetchData } from '../../../hooks/useFetchData';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { enqueueSnackbar } from 'notistack';
+import { useFetchData } from '../../../hooks/useFetchData';
+import { Form, Input, SectionHeader } from '../../shared';
 
 const SingUpDashboard = () => {
 	const navigate = useNavigate();
-	const { data } = useFetchData('http://localhost:3000/users');
-	const usersData = data;
+	const { data: usersData } = useFetchData('http://localhost:3000/users');
 
 	const singUpSchema = z
 		.object({

@@ -7,9 +7,9 @@ const Logo = () => {
 				<img
 					src='./src/icons/pokeball2.png'
 					alt='Pokedex Logo'
-					className='w-12 h-12 self-center md:w-16 md:h-16 '
+					className='self-center w-12 h-12 md:w-16 md:h-16 '
 				/>
-				<h1 className='text-customDark dark:text-white text-4xl md:text-5xl font-semibold'>
+				<h1 className='text-4xl md:text-5xl font-semibold text-customDark dark:text-white'>
 					Pokedex
 				</h1>
 			</div>

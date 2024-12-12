@@ -1,16 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
-import { Button, SectionHeader } from '../../shared';
-import { EditContext, PokemonContext, StatsContext } from '../../../context';
 import { useNavigate } from 'react-router-dom';
-import { Loader } from '../../shared';
+import { EditContext, PokemonContext, StatsContext } from '../../../context';
+import { Button, SectionHeader, Loader } from '../../shared';
+import { EditListItem } from './components';
 
 const Edit = () => {
 	const { fetchStats } = useContext(StatsContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
 	const { newPokemons } = useContext(EditContext);
-	const navigate = useNavigate();
 	const [pokemonsData, setPokemonsData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const navigate = useNavigate();
 
 	const addNewPokemon = () => {
 		navigate('/newPokemon');
@@ -22,31 +22,26 @@ const Edit = () => {
 
 	useEffect(() => {
 		fetchStats();
-
-		// Mapowanie Pokémonów z API z priorytetem dla newPokemons
 		const combinedData = pokemonsDetails.map((pokemon) => {
-			const overriddenPokemon = newPokemons.find(
-				(newPokemon) => newPokemon.name.toLowerCase() === pokemon.name.toLowerCase()
+			const updatePokemon = newPokemons.find(
+				(newPokemon) =>
+					newPokemon.name.toLowerCase() === pokemon.name.toLowerCase()
 			);
-			return overriddenPokemon
+			return updatePokemon
 				? {
-						...overriddenPokemon,
-						// Zachowaj oryginalne zdjęcie, jeśli istnieje
+						...updatePokemon,
 						imageUrl: pokemon.imageUrl || pokemon.sprites?.front_default,
 				  }
 				: pokemon;
 		});
 
-		// Dodawanie nowych Pokémonów z newPokemons, których nie ma w API
 		const uniqueNewPokemons = newPokemons.filter(
 			(newPokemon) =>
 				!pokemonsDetails.some((pokemon) => pokemon.name === newPokemon.name)
 		);
 
-		// Łączenie danych
 		const finalData = [...combinedData, ...uniqueNewPokemons];
 
-		// Tworzenie danych do renderowania
 		const pokemonDetails = finalData.map((pokemon, index) => {
 			return {
 				id: index + 1,
@@ -74,7 +69,7 @@ const Edit = () => {
 	return (
 		<div className='flex justify-center flex-col py-4'>
 			<SectionHeader headerText='Edycja' />
-			<div className='w-fit p-4 self-center'>
+			<div className='self-center p-4 w-fit'>
 				<Button onClick={addNewPokemon}>Stwórz nowego pokemona</Button>
 			</div>
 
@@ -83,24 +78,14 @@ const Edit = () => {
 					Lista Pokemonów
 				</h3>
 
-				<div className='mt-6 flex justify-center'>
+				<div className='flex justify-center mt-6'>
 					<ul className='space-y-4 size-full max-w-5xl'>
 						{pokemonsData.map((pokemon) => (
-							<li
-								key={pokemon.id}
-								className='flex items-center justify-between border-b border-customGrey py-2'
-							>
-								<span className='font-semibold'>{pokemon.id}.</span>
-								<img
-									src={pokemon.img}
-									alt={pokemon.name}
-									className='h-12 w-12 sm:h-16 sm:w-16'
-								/>
-								<span className='text-lg'>{pokemon.name}</span>
-								<div className='w-30'>
-									<Button onClick={() => editPokemon(pokemon.name)}>Edytuj</Button>
-								</div>
-							</li>
+							<EditListItem
+								key={pokemon.name}
+								pokemon={pokemon}
+								editPokemon={editPokemon}
+							/>
 						))}
 					</ul>
 				</div>

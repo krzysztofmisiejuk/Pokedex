@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Button, Loader, SectionHeader } from '../../shared';
 import {
 	ArenaContext,
 	EditContext,
@@ -8,6 +7,7 @@ import {
 	StatsContext,
 } from '../../../context';
 import { ArenaCard, ArenaPlaceholder, ArenaResultModal } from './components';
+import { Button, Loader, SectionHeader } from '../../shared';
 
 const Arena = () => {
 	const { arenaPokemon, removeFromArena, fetchArenaData, arenaError } =
@@ -29,7 +29,7 @@ const Arena = () => {
 		const combinedPokemons = [...pokemonsDetails, ...newPokemons];
 		const selectedFighters = combinedPokemons
 			.filter((pokemon) =>
-				arenaPokemon.some((dataItem) => dataItem.name === pokemon.name)
+				arenaPokemon.some((arenaPokemon) => arenaPokemon.name === pokemon.name)
 			)
 			.map((pokemon) => {
 				const pokemonStats = stats.find((stat) => stat.name === pokemon.name);
@@ -89,7 +89,7 @@ const Arena = () => {
 
 	if (isLoading) {
 		return (
-			<div className='self-center py-4 '>
+			<div className='self-center py-4'>
 				<SectionHeader headerText='Arena' />
 				<Loader />
 				<p>Trwa ładowanie danych...</p>
@@ -100,7 +100,7 @@ const Arena = () => {
 	return (
 		<div className='py-4'>
 			<SectionHeader headerText='Arena' />
-			<div className='flex justify-center flex-col md:flex-row items-center py-4'>
+			<div className='flex flex-col md:flex-row justify-center items-center py-4'>
 				{fighters[0] ? (
 					<ArenaCard
 						fighter={fighters[0]}

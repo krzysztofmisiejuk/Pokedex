@@ -8,8 +8,8 @@
 Pokedex to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów pochodzących z API (https://pokeapi.co/). Strona pozwala na dodawanie pokemnów do ulubionych, walki w arenie, sortowanie pokemonów w rankingu, edycje pokemonów pochodzących z API oraz dodawanie nowych pokemonów do całej kolekcji. 
 
 ## Technologie
-<p>Srtona została utworzona przy pomocy: </p>
- * vite ^5.4.10
+rtona została utworzona przy pomocy: 
+*vite ^5.4.10
 <ul>
  
   <li>react ^18.3.1</li>

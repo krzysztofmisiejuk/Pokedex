@@ -20,7 +20,6 @@ PokedeX to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów poch
   <li>json-server ^0.17.4</li>
   <li>postcss ^8.4.48</li>
   <li>tailwindcss ^3.4.14</li>
-  <li>tailwindcss ^3.4.14</li>
   <li>flowbite ^2.5.2</li>
   <li>clsx ^2.1.1</li>
   <li>eslint ^9.13.0</li>
@@ -44,3 +43,9 @@ Repozytorium zawiera plik package.json, kóry zawiera niezbęde informacje do in
  
 
 ## Informacje szczegółowe
+
+### Wyszukiwarka
+### Ulubione
+### Arena
+### Ranking
+### Edycja

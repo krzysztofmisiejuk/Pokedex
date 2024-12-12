@@ -35,7 +35,11 @@ PokedeX to prosta aplikacja webowa umożliwiająca przeglądanie pokemonów poch
 ## Instalacja i uruchomienie
 Repozytorium zawiera plik package.json, kóry zawiera niezbęde informacje do instalaji wszytskich paczek koniecznych do prawidłowego działnia strony.
 <ol>
-  <li>Skopiuj repozytorium używając `git clone https://github.com/krzysztofmisiejuk/Pokedex`</li>
+  <li>Skopiuj repozytorium używając </br> 
+```
+	git clone https://github.com/krzysztofmisiejuk/Pokedex
+```
+  </li>
   <li> Pobierz aktualną wersję plików ```git pull```</li>
   <li>Przejdź pliku pokedex, użyj komendy w terminalu ```cd /pokedex/pokedex```</br></li>
   <li>Jeżeli znajdujesz się w prawidłowym pliku wpisz komndę w terminalu ```npm install```</li>
@@ -45,11 +49,7 @@ Repozytorium zawiera plik package.json, kóry zawiera niezbęde informacje do in
   <li>Strona POkedex powinna działać poprawnie</li>	
 </ol>
 
-```
-$ cd ../lorem
-$ npm install
-$ npm start
-```
+
  
 
 ## Informacje szczegółowe

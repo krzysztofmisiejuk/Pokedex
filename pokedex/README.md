@@ -50,7 +50,7 @@ Przejdź pliku właściwego pokedex, użyj komendy w terminalu `cd /pokedex`
 
 Jeżeli znajdujesz się w prawidłowym pliku wpisz komndę w terminalu `npm install`
 
-Powinny zostać zainstalowane wszytskie paczki będące konieczne do odpowiedniego działania strony.
+Powinny zostać zainstalowane wszytskie paczki będące konieczne do odpowiedniego działania strony, upewnij się, że masz je wszytskie zainstalowane.
 
 Strona korzysta z adresu http://localhost:5173, do uruchomienia poprzez Vite strony wpisz w terminalu `npm run dev`
 

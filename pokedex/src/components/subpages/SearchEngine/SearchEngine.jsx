@@ -35,6 +35,7 @@ const SearchEngine = () => {
 		setPokemonList(e.target.value);
 	};
 
+
 	if (error) {
 		return (
 			<p className='py-8 text-customRed'>Wystąpił błąd pobierania danych!</p>
@@ -49,7 +50,7 @@ const SearchEngine = () => {
 				placeholder='Wpisz nazwę pokemona'
 				onChange={handleOnChange}
 			/>
-			{isLoading ? (
+			{isLoading  && filteredData.length !== data?.length? (
 				<div className='self-center py-4'>
 					<Loader />
 					<p>Trwa ładowanie danych...</p>
@@ -72,5 +73,6 @@ const SearchEngine = () => {
 		</div>
 	);
 };
+
 
 export default SearchEngine;

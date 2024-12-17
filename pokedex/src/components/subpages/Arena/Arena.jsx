@@ -10,7 +10,7 @@ import { ArenaCard, ArenaPlaceholder, ArenaResultModal } from './components';
 import { Button, Loader, SectionHeader } from '../../shared';
 
 const Arena = () => {
-	const { arenaPokemon, removeFromArena, fetchArenaData, arenaError } =
+	const { arenaPokemon, removeFromArena, fetchArenaData } =
 		useContext(ArenaContext);
 	const { stats, addStats, fetchStats } = useContext(StatsContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
@@ -26,26 +26,74 @@ const Arena = () => {
 	}, []);
 
 	useEffect(() => {
-		const combinedPokemons = [...pokemonsDetails, ...newPokemons];
-		const selectedFighters = combinedPokemons
-			.filter((pokemon) =>
-				arenaPokemon.some((arenaPokemon) => arenaPokemon.name === pokemon.name)
-			)
-			.map((pokemon) => {
-				const pokemonStats = stats.find((stat) => stat.name === pokemon.name);
+		const createFighterObject = (pokemonDetail) => {
+			const updateFighterStats = newPokemons.find(
+				(newPokemon) =>
+					newPokemon.name?.toLowerCase() === pokemonDetail.name?.toLowerCase()
+			);
 
-				return {
-					...pokemon,
-					stats: {
-						wins: pokemonStats?.wins || 0,
-						loses: pokemonStats?.loses || 0,
-					},
-				};
-			});
+			const pokemonStats = stats.find(
+				(stat) => stat.name?.toLowerCase() === pokemonDetail.name?.toLowerCase()
+			);
+
+			const fighter = {
+				name: updateFighterStats?.name || pokemonDetail.name,
+				base_experience:
+					updateFighterStats?.base_experience ?? pokemonDetail.base_experience,
+				height:
+					updateFighterStats?.height || pokemonDetail.height || 'Brak danych',
+				weight:
+					updateFighterStats?.weight || pokemonDetail.weight || 'Brak danych',
+				imageUrl:
+					pokemonDetail.imageUrl || pokemonDetail.sprites?.front_default,
+				stats: {
+					wins: pokemonStats?.wins || 0,
+					loses: pokemonStats?.loses || 0,
+				},
+			};
+
+			if (pokemonStats?.newExp) {
+				fighter.base_experience += pokemonStats.newExp;
+			}
+
+			return fighter;
+		};
+
+		const updatedPokemons = pokemonsDetails.map(createFighterObject);
+
+		const uniqueNewPokemons = newPokemons
+			.filter(
+				(newPokemon) =>
+					!pokemonsDetails.some(
+						(pokemonDetail) =>
+							pokemonDetail.name?.toLowerCase() ===
+							newPokemon.name?.toLowerCase()
+					)
+			)
+			.map((newPokemon) => ({
+				name: newPokemon.name,
+				base_experience: newPokemon.base_experience,
+				height: newPokemon.height || 'Brak danych',
+				weight: newPokemon.weight || 'Brak danych',
+				imageUrl: newPokemon.imageUrl || 'Brak zdjęcia',
+				stats: {
+					wins: 0,
+					loses: 0,
+				},
+			}));
+
+		const combinedPokemons = [...updatedPokemons, ...uniqueNewPokemons];
+
+		const selectedFighters = combinedPokemons.filter((pokemon) =>
+			arenaPokemon.some(
+				(arenaPokemon) =>
+					arenaPokemon.name?.toLowerCase() === pokemon.name?.toLowerCase()
+			)
+		);
 
 		setFighters(selectedFighters);
 		setIsLoading(false);
-	}, [arenaPokemon, pokemonsDetails, stats]);
+	}, [arenaPokemon, pokemonsDetails, newPokemons, stats]);
 
 	const startFight = () => {
 		if (fighters.length < 2) return;
@@ -80,12 +128,6 @@ const Arena = () => {
 		setIsModalOpen(false);
 		fighters.forEach((fighter) => removeFromArena(fighter.name));
 	};
-
-	if (arenaError) {
-		return (
-			<p className='py-8 text-customRed'>Wystąpił błąd pobierania danych!</p>
-		);
-	}
 
 	if (isLoading) {
 		return (

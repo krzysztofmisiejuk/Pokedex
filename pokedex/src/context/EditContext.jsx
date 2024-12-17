@@ -4,6 +4,8 @@ const EditContext = createContext();
 
 const EditProvider = ({ children }) => {
 	const [newPokemons, setNewPokemons] = useState([]);
+	const [errorNewPokemons, setErrorNewPokemons] = useState([]);
+
 	const fetchNewPokemons = async () => {
 		try {
 			const response = await fetch('http://localhost:3000/newPokemons');
@@ -14,11 +16,12 @@ const EditProvider = ({ children }) => {
 			setNewPokemons([...data]);
 		} catch (error) {
 			console.error('Error fetching local data:', error);
+			setErrorNewPokemons(error)
 		}
 	};
 	return (
 		<EditContext.Provider
-			value={{newPokemons, setNewPokemons, fetchNewPokemons}}
+			value={{newPokemons, setNewPokemons, fetchNewPokemons, errorNewPokemons}}
 		>
 			{children}
 		</EditContext.Provider>

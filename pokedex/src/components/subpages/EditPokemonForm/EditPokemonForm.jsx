@@ -60,6 +60,7 @@ const EditPokemonForm = () => {
 			...formData,
 			name: formData.name?.trim() || matchedPokemon?.name,
 			imageUrl: matchedPokemon?.imageUrl,
+			pokemonId: matchedPokemon.id ? matchedPokemon.id : matchedPokemon.pokemonId ,
 		};
 
 		try {

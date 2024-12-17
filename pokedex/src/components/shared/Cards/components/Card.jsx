@@ -7,7 +7,7 @@ import {
 	PokemonContext,
 } from '../../../../context';
 import CardIcons from './CardIcons';
-import { Attributes, SectionHeader, FightInfo, Loader } from '../../';
+import { Attributes, FightInfo, Loader } from '../../';
 
 const Card = ({ name, addedPokemons, page }) => {
 	const { isLoggedIn } = useContext(LoginContext);
@@ -98,7 +98,6 @@ const Card = ({ name, addedPokemons, page }) => {
 	if (isLoading) {
 		return (
 			<div className='self-center py-4'>
-				<SectionHeader headerText='Ranking' />
 				<Loader />
 				<p>Trwa ładowanie danych...</p>
 			</div>

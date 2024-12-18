@@ -2,17 +2,27 @@ import { useState, useMemo, useEffect, useContext } from 'react';
 import { useFetchData } from '../../../hooks';
 import { Cards, Loader, SectionHeader } from '../../shared';
 import { Pagination } from './components';
-import { EditContext } from '../../../context';
+import { ArenaContext, EditContext, FavouritesContext } from '../../../context';
 
 const SearchEngine = () => {
 	const [searchPokemon, setPokemonList] = useState('');
 	const [page, setPage] = useState(0);
 	const [addedPokemons, setAddedPokemons] = useState([]);
 	const { newPokemons } = useContext(EditContext);
+	const { fetchFavourites } = useContext(FavouritesContext);
+	const { fetchArenaData } = useContext(ArenaContext);
 	const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=15&offset=${
 		page * 15
 	}`;
 	const { data, isLoading, error } = useFetchData(BASE_URL);
+
+	useEffect(() => {
+		fetchArenaData();
+	}, []);
+
+	useEffect(() => {
+		fetchFavourites();
+	}, []);
 
 	useEffect(() => {
 		if (newPokemons && newPokemons.length > 0) {
@@ -35,7 +45,6 @@ const SearchEngine = () => {
 		setPokemonList(e.target.value);
 	};
 
-
 	if (error) {
 		return (
 			<p className='py-8 text-customRed'>Wystąpił błąd pobierania danych!</p>
@@ -50,7 +59,7 @@ const SearchEngine = () => {
 				placeholder='Wpisz nazwę pokemona'
 				onChange={handleOnChange}
 			/>
-			{isLoading  && filteredData.length !== data?.length? (
+			{isLoading && filteredData.length !== data?.length ? (
 				<div className='self-center py-4'>
 					<Loader />
 					<p>Trwa ładowanie danych...</p>
@@ -73,6 +82,4 @@ const SearchEngine = () => {
 		</div>
 	);
 };
-
-
 export default SearchEngine;

@@ -1,20 +1,16 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import clsx from 'clsx';
 import { ArenaContext } from '../../../../context';
 
 const SwordIcon = ({ name }) => {
-	const { arenaPokemon, fetchArenaData, addToArena, removeFromArena } =
+	const { arenaPokemon, addToArena, removeFromArena } =
 		useContext(ArenaContext);
 	const arenaCapacity = arenaPokemon.length;
 	const isFight = useMemo(
 		() => arenaPokemon.some((item) => item.name === name),
 		[arenaPokemon, name]
 	);
-
-	useEffect(() => {
-		fetchArenaData();
-	}, []);
 
 	const handleSwordClick = async (e) => {
 		e.stopPropagation();

@@ -1,20 +1,15 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import clsx from 'clsx';
 import { FavouritesContext } from '../../../../context';
 
 const HeartIcon = ({ name }) => {
-	const { favourites, addToFav, deleteFromFav, fetchFavourites } =
-		useContext(FavouritesContext);
+	const { favourites, addToFav, deleteFromFav } = useContext(FavouritesContext);
 
 	const isFavourite = useMemo(
 		() => favourites.some((item) => item.name === name),
 		[favourites, name]
 	);
-
-	useEffect(() => {
-		fetchFavourites();
-	}, []);
 
 	const handleHeartClick = async (e) => {
 		e.stopPropagation();
@@ -43,6 +38,7 @@ const HeartIcon = ({ name }) => {
 				});
 			}
 		}
+		// fetchFavourites()
 	};
 
 	return (

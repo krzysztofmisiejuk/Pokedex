@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useContext } from 'react';
+import { MainWrapper, SectionWrapper, Nav } from './components';
+import './App.css';
+import { EditContext, PokemonContext, StatsContext } from './context';
+import { useFetchData } from './hooks';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0)
+	const { setPokemons, setPokemonsDetails, setErrorPokemonsDetails } =
+		useContext(PokemonContext);
+	const { fetchStats } = useContext(StatsContext);
+	const { fetchNewPokemons } = useContext(EditContext);
+	const { data } = useFetchData('https://pokeapi.co/api/v2/pokemon?limit=150');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		if (data && data.results) {
+			setPokemons(data.results);
+
+			data.results.forEach(async ({ name }) => {
+				try {
+					const response = await fetch(
+						`https://pokeapi.co/api/v2/pokemon/${name}`
+					);
+					if (!response.ok) {
+						throw new Error('Nie można pobrać danych pokemona');
+					}
+					const singlePokemonData = await response.json();
+
+					setPokemonsDetails((prev) => [
+						...prev,
+						singlePokemonData,
+					]);
+				} catch (error) {
+					console.error(error.message);
+					setErrorPokemonsDetails(error);
+				}
+			});
+		}
+		fetchStats();
+		fetchNewPokemons();
+	}, [data]);
+
+	return (
+		<div className='h-full min-h-screen flex justify-center dark:border-customLightGrey border-customDark bg-lightGradient dark:bg-darkGradient text-customDark dark:text-white'>
+			<MainWrapper>
+				<Nav />
+				<SectionWrapper>
+					<Outlet />
+				</SectionWrapper>
+			</MainWrapper>
+		</div>
+	);
 }
 
-export default App
+export default App;

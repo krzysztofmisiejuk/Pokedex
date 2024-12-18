@@ -1,0 +1,15 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"name": "user",
+			"userName": "user",
+			"email": "user@email.pl",
+			"password": "Password123!"
+		}
+	],
+	"favourites": [],
+	"arena": [],
+	"stats": [],
+	"newPokemons": []
+}

@@ -4,15 +4,20 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { enqueueSnackbar } from 'notistack';
-import { EditContext, PokemonContext } from '../../../context';
+import { EditContext, PokemonContext, StatsContext } from '../../../context';
 import { Button, Form, Input, Loader } from '../../shared';
 
 const EditPokemonForm = () => {
 	const { newPokemons, fetchNewPokemons } = useContext(EditContext);
 	const { pokemonsDetails } = useContext(PokemonContext);
+	const { stats } = useContext(StatsContext);
 	const [matchedPokemon, setMatchedPokemon] = useState(null);
 	const navigate = useNavigate();
 	const { name: pokemonName } = useParams();
+
+	const isExistStat = stats.find(
+		(stat) => stat.name.toLowerCase() === pokemonName.toLowerCase()
+	);
 
 	const newPokemonSchema = z.object({
 		name: z.string().optional(),
@@ -60,17 +65,25 @@ const EditPokemonForm = () => {
 			...formData,
 			name: formData.name?.trim() || matchedPokemon?.name,
 			imageUrl: matchedPokemon?.imageUrl,
-			pokemonId: matchedPokemon.id ? matchedPokemon.id : matchedPokemon.pokemonId ,
+			pokemonId: matchedPokemon.id
+				? matchedPokemon.id
+				: matchedPokemon.pokemonId,
+			weight: formData.weight === "" ? matchedPokemon?.weight : formData.weight,
+			height: formData.height === "" ? matchedPokemon?.height : formData.height,
+			base_experience:
+				formData.base_experience === ""
+					? matchedPokemon?.base_experience
+					: formData.base_experience,
 		};
 
 		try {
 			const existingPokemon = newPokemons.find(
 				(pokemon) =>
-					pokemon?.name?.toLowerCase() === formData?.name?.toLowerCase()
+					pokemon?.name?.toLowerCase() === pokemonData?.name?.toLowerCase()
 			);
 			if (existingPokemon) {
 				const response = await fetch(
-					`http://localhost:3000/newPokemons/${formData.name}`,
+					`http://localhost:3000/newPokemons/${existingPokemon.id}`,
 					{
 						method: 'PATCH',
 						headers: {
@@ -85,7 +98,7 @@ const EditPokemonForm = () => {
 				}
 
 				enqueueSnackbar({
-					message: `${formData.name} został zaktualizowany`,
+					message: `${pokemonName.name} został zaktualizowany`,
 					variant: 'success',
 				});
 			} else {
@@ -139,14 +152,14 @@ const EditPokemonForm = () => {
 					Edytuj Pokemona
 				</h3>
 				<Input
-					placeholder='Podaj nazwę nowego pokemona'
+					placeholder='Edytuj nazwę pokemona'
 					name='name'
 					register={register}
 					errors={errors.name}
 					defaultValue={matchedPokemon?.name}
 				/>
 				<Input
-					placeholder='Podaj wagę nowego pokemona'
+					placeholder='Edytuj wagę pokemona'
 					name='weight'
 					register={register}
 					errors={errors.weight}
@@ -154,7 +167,7 @@ const EditPokemonForm = () => {
 					defaultValue={matchedPokemon?.weight}
 				/>
 				<Input
-					placeholder='Podaj wzrost nowego pokemona'
+					placeholder='Edytuj wzrost pokemona'
 					name='height'
 					register={register}
 					errors={errors.height}
@@ -162,12 +175,19 @@ const EditPokemonForm = () => {
 					defaultValue={matchedPokemon?.height}
 				/>
 				<Input
-					placeholder='Podaj doświadczenie nowego pokemona'
+					placeholder='Edytuj doświadczenie pokemona'
 					name='base_experience'
 					register={register}
 					errors={errors.base_experience}
 					type='number'
-					defaultValue={matchedPokemon?.base_experience}
+					defaultValue={
+						isExistStat && matchedPokemon
+							? (
+									Number(matchedPokemon?.base_experience || 0) +
+									isExistStat.newExp
+							  ).toString()
+							: matchedPokemon?.base_experience
+					}
 				/>
 
 				<div className='self-center flex items-center'>

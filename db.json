@@ -8,12 +8,7 @@
 			"password": "Password123!"
 		}
 	],
-	"favourites": [
-		{
-			"name": "ivysaur",
-			"id": 1
-		}
-	],
+	"favourites": [],
 	"arena": [],
 	"stats": [],
 	"newPokemons": []

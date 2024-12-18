@@ -21,11 +21,9 @@ const EditPokemonForm = () => {
 
 	const newPokemonSchema = z.object({
 		name: z.string().optional(),
-		weight: z.string().min(1, { message: 'Musisz wpisać masę pokemona' }),
-		height: z.string().min(1, { message: 'Musisz wpisać wzrost pokemona' }),
-		base_experience: z
-			.string()
-			.min(1, { message: 'Musisz wpisać doświadczenie pokemona' }),
+		weight: z.string().optional(),
+		height: z.string().optional(),
+		base_experience: z.string().optional(),
 	});
 
 	const {
@@ -68,11 +66,11 @@ const EditPokemonForm = () => {
 			pokemonId: matchedPokemon.id
 				? matchedPokemon.id
 				: matchedPokemon.pokemonId,
-			weight: formData.weight === "" ? matchedPokemon?.weight : formData.weight,
-			height: formData.height === "" ? matchedPokemon?.height : formData.height,
+			weight: formData.weight === '' ? String(matchedPokemon?.weight) : formData.weight,
+			height: formData.height === '' ? String(matchedPokemon?.height) : formData.height,
 			base_experience:
-				formData.base_experience === ""
-					? matchedPokemon?.base_experience
+				formData.base_experience === ''
+					? String(matchedPokemon?.base_experience)
 					: formData.base_experience,
 		};
 
@@ -98,7 +96,7 @@ const EditPokemonForm = () => {
 				}
 
 				enqueueSnackbar({
-					message: `${pokemonName.name} został zaktualizowany`,
+					message: `${pokemonName} został zaktualizowany`,
 					variant: 'success',
 				});
 			} else {
@@ -115,7 +113,7 @@ const EditPokemonForm = () => {
 				}
 
 				enqueueSnackbar({
-					message: `${formData.name} został dodany do listy pokemonów`,
+					message: `${pokemonName} został dodany do listy pokemonów`,
 					variant: 'success',
 				});
 			}

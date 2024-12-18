@@ -53,7 +53,6 @@ const Arena = () => {
 				},
 			};
 
-			console.log(fighter);
 			return fighter;
 		};
 

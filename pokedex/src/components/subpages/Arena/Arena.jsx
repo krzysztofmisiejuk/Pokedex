@@ -46,16 +46,14 @@ const Arena = () => {
 					updateFighterStats?.weight || pokemonDetail.weight || 'Brak danych',
 				imageUrl:
 					pokemonDetail.imageUrl || pokemonDetail.sprites?.front_default,
+				abilities: pokemonDetail?.abilities,
 				stats: {
 					wins: pokemonStats?.wins || 0,
 					loses: pokemonStats?.loses || 0,
 				},
 			};
 
-			if (pokemonStats?.newExp) {
-				fighter.base_experience += pokemonStats.newExp;
-			}
-
+			console.log(fighter);
 			return fighter;
 		};
 
@@ -76,6 +74,7 @@ const Arena = () => {
 				height: newPokemon.height || 'Brak danych',
 				weight: newPokemon.weight || 'Brak danych',
 				imageUrl: newPokemon.imageUrl || 'Brak zdjęcia',
+				abilities: newPokemon.abilities || 'Brak danych',
 				stats: {
 					wins: 0,
 					loses: 0,

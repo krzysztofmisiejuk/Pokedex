@@ -1,85 +1,15 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "user",
-      "userName": "user",
-      "email": "user@email.pl",
-      "password": "Password123!"
-    }
-  ],
-  "favourites": [
-    {
-      "name": "ivysaur",
-      "id": 1
-    },
-    {
-      "name": "bulbasaur",
-      "id": 2
-    },
-    {
-      "name": "venusaur",
-      "id": 3
-    },
-    {
-      "name": "charmeleon",
-      "id": 4
-    },
-    {
-      "name": "primeape",
-      "id": 5
-    },
-    {
-      "name": "sandshrew",
-      "id": 6
-    }
-  ],
-  "arena": [],
-  "stats": [
-    {
-      "name": "charmander",
-      "wins": 1,
-      "loses": 2,
-      "newExp": 10,
-      "id": 1
-    },
-    {
-      "name": "bulbasaur",
-      "wins": 2,
-      "loses": 1,
-      "newExp": 20,
-      "id": 2
-    },
-    {
-      "name": "venusaur",
-      "wins": 1,
-      "loses": 1,
-      "newExp": 10,
-      "id": 3
-    },
-    {
-      "name": "growlithe",
-      "wins": 1,
-      "loses": 0,
-      "newExp": 10,
-      "id": 4
-    },
-    {
-      "name": "caterpie",
-      "wins": 0,
-      "loses": 1,
-      "newExp": 0,
-      "id": 5
-    }
-  ],
-  "newPokemons": [
-    {
-      "name": "bulbasaur",
-      "weight": "3000",
-      "height": "3000",
-      "base_experience": "3000",
-      "pokemonId": 1,
-      "id": 1
-    }
-  ]
+	"users": [
+		{
+			"id": 1,
+			"name": "user",
+			"userName": "user",
+			"email": "user@email.pl",
+			"password": "Password123!"
+		}
+	],
+	"favourites": [],
+	"arena": [],
+	"stats": [],
+	"newPokemons": []
 }
